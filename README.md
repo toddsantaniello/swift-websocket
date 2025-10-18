@@ -44,7 +44,7 @@ for try await message in webSocket.messages {
 }
 
 // Observe state changes
-for try await event in webSocket.stateEvents {
+for await event in webSocket.stateEvents {
     switch event {
     case .connecting:
         print("The WebSocket is connecting...")
@@ -56,7 +56,7 @@ for try await event in webSocket.stateEvents {
 }
 
 // Disconnect the socket
-try webSocket.disconnect()
+try await webSocket.disconnect()
 ```
 
 ### Heartbeats

@@ -114,7 +114,7 @@ public actor WebSocket {
     ///   - reason: Optional further information to explain the closing.
     ///
     /// - Throws WebSocketError.notConnected when the WebSocket is not connected.
-    func disconnect(closeCode: URLSessionWebSocketTask.CloseCode = .normalClosure, reason: String? = nil) async throws {
+    public func disconnect(closeCode: URLSessionWebSocketTask.CloseCode = .normalClosure, reason: String? = nil) async throws {
         guard state == .connected else {
             throw WebSocketError.notConnected
         }

@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-actor ReconnectableWebSocket {
+public actor ReconnectableWebSocket {
     /// A stream of messages received by the socket.
     ///
     /// This stream will only finish when ReconnectableWebSocket deinitializes.
@@ -40,7 +40,7 @@ actor ReconnectableWebSocket {
     ///   - heartbeats: Whether to send heartbeats after connecting.
     ///   - connector: A closure that returns a URLRequest used to connect the WebSocket. This closure will be called
     ///                every time the web WebSocket connects.
-    init(
+    public init(
         urlSession: URLSession = URLSession.shared,
         heartbeats: WebSocket.Heartbeats = .disabled,
         connector: @escaping () -> URLRequest,

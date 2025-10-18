@@ -46,7 +46,7 @@ extension WebSocket {
         ///
         /// If the message is a data message, the data will be used as-is. If the message is a string message,
         /// the string will be converted to data using UTF-8 before decoding it.
-        func decode<T, Decoder>(
+        public func decode<T, Decoder>(
             _ type: T.Type,
             decoder: Decoder = JSONDecoder()
         ) throws -> T where T: Decodable, Decoder: TopLevelDecoder, Decoder.Input == Data {
