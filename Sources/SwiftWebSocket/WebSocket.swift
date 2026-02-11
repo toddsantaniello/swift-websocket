@@ -184,6 +184,24 @@ public actor WebSocket {
         }
     }
 
+    /// Start sending a string heartbeat at regular intervals.
+    ///
+    /// - Parameters:
+    ///   - heartbeat: The heartbeat string to send (as a text frame).
+    ///   - interval: The interval between heartbeats.
+    private func startHeartbeats(sending heartbeat: String, every interval: Duration) {
+        heartbeatTask?.cancel()
+
+        heartbeatTask = Task {
+            if Task.isCancelled { return }
+
+            try await send(heartbeat)
+            try await Task.sleep(for: interval)
+
+            startHeartbeats(sending: heartbeat, every: interval)
+        }
+    }
+
     /// Stop sending heartbeats.
     private func stopHeartbeats() {
         heartbeatTask?.cancel()
@@ -240,6 +258,8 @@ public actor WebSocket {
             break
         case .enabled(let interval, let data):
             startHeartbeats(sending: data, every: interval)
+        case .enabledWithString(let interval, let string):
+            startHeartbeats(sending: string, every: interval)
         }
     }
 

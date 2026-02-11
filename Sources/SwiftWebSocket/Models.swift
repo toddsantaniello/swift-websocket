@@ -32,6 +32,7 @@ extension WebSocket {
     public enum Heartbeats: Sendable {
         case disabled
         case enabled(every: Duration, data: Data)
+        case enabledWithString(every: Duration, string: String)
     }
 
     public enum Message: Sendable {
